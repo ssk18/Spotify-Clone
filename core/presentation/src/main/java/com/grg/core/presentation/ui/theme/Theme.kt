@@ -1,4 +1,4 @@
-package com.grg.spotify.ui.theme
+package com.grg.core.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

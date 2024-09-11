@@ -1,30 +1,41 @@
 package com.grg.spotify.auth.data.utils
 
+import com.grg.spotify.domain.ICodeChallengeProvider
+import com.grg.spotify.domain.ICodeVerifierStore
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
 import java.util.Base64
+import javax.inject.Inject
 
-object PKCEUtil {
+class CodeChallengeProvider @Inject constructor(private val codeStore: ICodeVerifierStore) :
+    ICodeChallengeProvider {
     private var verifier = ""
 
-    fun getCodeVerifier(): String {
-        return verifier
+    override fun getCodeVerifier(): String {
+        return verifier.takeIf { it.isNotBlank() } ?: run {
+            codeStore.getCodeVerifier().orEmpty().also {
+                verifier = it
+            }
+        }
     }
 
-    fun getCodeChallenge(): String {
+    override fun getCodeChallenge(): String {
         verifier = generateCodeVerifier()
         return generateCodeChallenge(verifier)
     }
 
     @Throws(UnsupportedEncodingException::class)
     private fun generateCodeVerifier(): String {
-        val secureRandom = SecureRandom()
-        val codeVerifier = ByteArray(32)
-        secureRandom.nextBytes(codeVerifier)
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(codeVerifier)
-
+        return codeStore.getCodeVerifier() ?: run {
+            val secureRandom = SecureRandom()
+            val codeVerifier = ByteArray(64)
+            secureRandom.nextBytes(codeVerifier)
+            Base64.getUrlEncoder().withoutPadding().encodeToString(codeVerifier).also { code ->
+                codeStore.saveCodeVerifier(code)
+            }
+        }
     }
 
     @Throws(UnsupportedEncodingException::class, NoSuchAlgorithmException::class)
