@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.grg.spotify.core.extensions.orElse
 import com.grg.spotify.domain.ICodeVerifierStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -12,22 +13,44 @@ class CodeVerifierStore(
     private val dataStore: DataStore<Preferences>,
 ) : ICodeVerifierStore {
     override fun getCodeVerifier(): String? {
-        // TODO: Extremely bad and poor practice. change soon
-        return runBlocking {
-            dataStore.data.first()[KEY_CODE_VERIFIER]
-        }
+        return getString(KEY_CODE_VERIFIER)
     }
 
-    override fun saveCodeVerifier(codeVerifier: String) {
+    override fun saveCodeVerifier(codeVerifier: String?) {
+        saveString(codeVerifier, KEY_CODE_VERIFIER)
+    }
+
+    override fun saveRequestState(state: String?) {
+        saveString(state, KEY_REQUEST_STATE)
+    }
+
+    override fun getRequestState(): String? {
+        return getString(KEY_REQUEST_STATE)
+    }
+
+    private fun saveString(data: String?, key: Preferences.Key<String>) {
         // TODO: Extremely bad and poor practice. change soon
         runBlocking {
             dataStore.edit { preferences ->
-                preferences[KEY_CODE_VERIFIER] = codeVerifier
+                data?.let {
+                    preferences[key] = data
+                }.orElse {
+
+                    preferences.remove(key)
+                }
             }
+        }
+    }
+
+    private fun getString(key: Preferences.Key<String>): String? {
+        // TODO: Extremely bad and poor practice. change soon
+        return runBlocking {
+            dataStore.data.first()[key]
         }
     }
 
     companion object {
         private val KEY_CODE_VERIFIER = stringPreferencesKey("code_verifier")
+        private val KEY_REQUEST_STATE = stringPreferencesKey("request_state")
     }
 }

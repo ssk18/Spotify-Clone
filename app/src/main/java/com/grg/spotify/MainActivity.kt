@@ -1,5 +1,6 @@
 package com.grg.spotify
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.grg.core.presentation.ui.theme.MySpotifyTheme
+import com.grg.spotify.presentation.ui.AuthActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        startActivity(Intent(this, AuthActivity::class.java))
     }
 }
 

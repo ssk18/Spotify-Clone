@@ -1,5 +1,6 @@
 package com.grg.spotify.auth.data.utils
 
+import com.grg.spotify.core.extensions.orElse
 import com.grg.spotify.domain.ICodeChallengeProvider
 import com.grg.spotify.domain.ICodeVerifierStore
 import java.io.UnsupportedEncodingException
@@ -11,10 +12,11 @@ import javax.inject.Inject
 
 class CodeChallengeProvider @Inject constructor(private val codeStore: ICodeVerifierStore) :
     ICodeChallengeProvider {
+
     private var verifier = ""
 
     override fun getCodeVerifier(): String {
-        return verifier.takeIf { it.isNotBlank() } ?: run {
+        return verifier.takeIf { it.isNotBlank() }.orElse {
             codeStore.getCodeVerifier().orEmpty().also {
                 verifier = it
             }
@@ -22,13 +24,15 @@ class CodeChallengeProvider @Inject constructor(private val codeStore: ICodeVeri
     }
 
     override fun getCodeChallenge(): String {
-        verifier = generateCodeVerifier()
+        if (verifier.isBlank()) {
+            verifier = generateCodeVerifier()
+        }
         return generateCodeChallenge(verifier)
     }
 
     @Throws(UnsupportedEncodingException::class)
     private fun generateCodeVerifier(): String {
-        return codeStore.getCodeVerifier() ?: run {
+       return codeStore.getCodeVerifier().orElse {
             val secureRandom = SecureRandom()
             val codeVerifier = ByteArray(64)
             secureRandom.nextBytes(codeVerifier)

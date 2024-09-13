@@ -5,16 +5,16 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.4"
-activityCompose = "1.9.1"
-composeBom = "2024.04.01"
-uiTextGoogleFonts = "1.7.0"
+lifecycleRuntimeKtx = "2.8.5"
+activityCompose = "1.9.2"
+composeBom = "2024.09.01"
+uiTextGoogleFonts = "1.7.1"
 jetbrainsKotlinJvm = "1.9.0"
 appcompat = "1.7.0"
 material = "1.12.0"
 retrofit2 = "2.11.0"
 sandwich = "2.0.8"
-activity = "1.9.1"
+activity = "1.9.2"
 constraintlayout = "2.1.4"
 hiltCompilerVersion = "1.2.0"
 hiltVersion = "2.51.1"
@@ -22,6 +22,7 @@ room = "2.6.1"
 kspPlugin = "1.9.0-1.0.12"
 browser = "1.8.0"
 preference-data-store = "1.1.1"
+splash-screen = "1.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +57,8 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
 data-store = { module = "androidx.datastore:datastore-preferences", version.ref = "preference-data-store" }
+
+compose-splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

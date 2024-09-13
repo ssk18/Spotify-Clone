@@ -4,5 +4,10 @@ interface ICodeVerifierStore {
 
     fun getCodeVerifier(): String?
 
-    fun saveCodeVerifier(codeVerifier: String)
+    fun saveCodeVerifier(codeVerifier: String?)
+
+    fun saveRequestState(state: String?)
+
+    fun getRequestState(): String?
+
 }
