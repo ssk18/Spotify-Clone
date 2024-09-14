@@ -7,4 +7,11 @@ interface IAuthRepository {
         scope: String,
         launchAuthScreen: (url: String) -> Unit
     )
+
+    suspend fun postRequestAccess(
+        authCode: String,
+        redirectUri: String,
+        clientId: String,
+        codeVerifier: String
+    ): Result<AccessTokenInfo>
 }

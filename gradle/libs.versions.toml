@@ -23,6 +23,7 @@ kspPlugin = "1.9.0-1.0.12"
 browser = "1.8.0"
 preference-data-store = "1.1.1"
 splash-screen = "1.0.1"
+logging-interceptor = "5.0.0-alpha.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +44,8 @@ androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 android-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
+retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit2" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "logging-interceptor" }
 sandwich = { module = "com.github.skydoves:sandwich", version.ref = "sandwich" }
 sandwich-retrofit = { module = "com.github.skydoves:sandwich-retrofit", version.ref = "sandwich" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }

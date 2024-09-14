@@ -43,6 +43,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.sandwich)
     implementation(libs.sandwich.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.logging.interceptor)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
