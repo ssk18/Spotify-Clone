@@ -1,6 +1,7 @@
 package com.grg.spotify.auth.data.mappers
 
-import com.grg.spotify.core.extensions.orElse
+import com.grg.core.domain.orElse
+import com.grg.spotify.domain.AccessTokenInfo
 import com.skydoves.sandwich.ApiResponse
 
 
@@ -14,5 +15,22 @@ inline fun <reified T> ApiResponse<T>.toResult(): Result<T> {
         )
 
         is ApiResponse.Failure.Exception -> Result.failure(throwable)
+    }
+}
+
+fun ApiResponse<SerializedAccessTokenInfo>.toDomain(): Result<AccessTokenInfo> {
+    return when (this) {
+        is ApiResponse.Success -> {
+            // Map SerializedAccessTokenInfo to domain model AccessTokenInfo
+            Result.success(this.data.toAccessTokenInfo())
+        }
+        is ApiResponse.Failure.Exception -> {
+            // Return the exception wrapped in Result
+            Result.failure(this.throwable)
+        }
+        is ApiResponse.Failure.Error -> {
+            // Handle API-specific error
+            Result.failure(Exception("API Error: ${this.payload}"))
+        }
     }
 }

@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":core:presentation"))
     implementation(project(":auth:domain"))
     implementation(project(":auth:data"))
+    implementation(project(":core:domain"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -66,6 +67,7 @@ dependencies {
 
     // hilt
     implementation(libs.hilt.android)
+    debugImplementation(libs.ui.tooling)
     kapt(libs.hilt.android.compiler)
     kapt(libs.androidx.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)

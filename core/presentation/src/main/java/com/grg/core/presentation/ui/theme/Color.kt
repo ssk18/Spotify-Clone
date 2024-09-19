@@ -2,6 +2,18 @@ package com.grg.core.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val SpotifyGreen = Color(0xFF00F15E)
+val SpotifyGreen30 = Color(0x4D00F15E)
+val SpotifyGreen10 = Color(0x1A00F15E)
+val SpotifyGreen5 = Color(0x0D00F15E)
+val SpotifyBlack = Color(0xFF080707)
+val SpotifyGray = Color(0xFF87938C)
+val SpotifyGray40 = Color(0x6687938C)
+val SpotifyDarkGray = Color(0xFF232624)
+val SpotifyWhite = Color(0xFFFAFAFA)
+val SpotifyDarkRed = Color(0xFFBB3D3D)
+val SpotifyDarkRed5 = Color(0x0DBB3D3D)
+
 val primaryLight = Color(0xFF415F91)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFD6E3FF)

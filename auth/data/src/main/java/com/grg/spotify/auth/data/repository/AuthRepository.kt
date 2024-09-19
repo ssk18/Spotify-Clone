@@ -1,6 +1,7 @@
 package com.grg.spotify.auth.data.repository
 
-import com.grg.spotify.auth.data.mappers.toResult
+import com.grg.spotify.auth.data.mappers.SerializedAccessTokenInfo
+import com.grg.spotify.auth.data.mappers.toDomain
 import com.grg.spotify.auth.data.networking.SpotifyAuthService
 import com.grg.spotify.auth.data.utils.Constants
 import com.grg.spotify.domain.AccessTokenInfo
@@ -51,6 +52,6 @@ class AuthRepository @Inject constructor(
             redirectUri = redirectUri,
             clientId = clientId,
             codeVerifier = codeVerifier
-        ).toResult()
+        ).toDomain()
     }
 }

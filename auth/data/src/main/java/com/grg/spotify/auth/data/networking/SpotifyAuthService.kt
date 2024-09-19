@@ -1,6 +1,6 @@
 package com.grg.spotify.auth.data.networking
 
-import com.grg.spotify.domain.AccessTokenInfo
+import com.grg.spotify.auth.data.mappers.SerializedAccessTokenInfo
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -18,5 +18,5 @@ interface SpotifyAuthService {
         @Field("redirect_uri") redirectUri: String,
         @Field("client_id") clientId: String,
         @Field("code_verifier") codeVerifier: String
-    ): ApiResponse<AccessTokenInfo>
+    ): ApiResponse<SerializedAccessTokenInfo>
 }

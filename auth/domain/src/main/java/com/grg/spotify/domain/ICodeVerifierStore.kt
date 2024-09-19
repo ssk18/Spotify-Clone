@@ -10,4 +10,12 @@ interface ICodeVerifierStore {
 
     fun getRequestState(): String?
 
+    fun getAccessToken(): String?
+
+    fun saveAccessToken(accessToken: String?)
+
+    fun getRefreshToken(): String?
+
+    fun saveRefreshToken(refreshToken: String?)
+
 }

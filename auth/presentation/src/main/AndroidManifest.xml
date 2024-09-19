@@ -6,7 +6,7 @@
     <application>
         <activity
             android:name="com.grg.spotify.presentation.ui.AuthActivity"
-            android:theme="@style/Theme.AppCompat.DayNight"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:launchMode="singleInstance"
             android:exported="true"
             >

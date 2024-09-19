@@ -1,4 +1,4 @@
-package com.grg.spotify.core.extensions
+package com.grg.core.domain
 
 inline fun <reified T> T?.orElse(other: T): T = this ?: other
 

@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.grg.spotify.core.extensions.orElse
+import com.grg.core.domain.orElse
 import com.grg.spotify.domain.ICodeVerifierStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -26,6 +26,22 @@ class CodeVerifierStore(
 
     override fun getRequestState(): String? {
         return getString(KEY_REQUEST_STATE)
+    }
+
+    override fun getAccessToken(): String? {
+        return getString(KEY_ACCESS_TOKEN)
+    }
+
+    override fun saveAccessToken(accessToken: String?) {
+        saveString(accessToken, KEY_ACCESS_TOKEN)
+    }
+
+    override fun getRefreshToken(): String? {
+        return getString(KEY_REFRESH_TOKEN)
+    }
+
+    override fun saveRefreshToken(refreshToken: String?) {
+        saveString(refreshToken, KEY_REFRESH_TOKEN)
     }
 
     private fun saveString(data: String?, key: Preferences.Key<String>) {
@@ -52,5 +68,7 @@ class CodeVerifierStore(
     companion object {
         private val KEY_CODE_VERIFIER = stringPreferencesKey("code_verifier")
         private val KEY_REQUEST_STATE = stringPreferencesKey("request_state")
+        private val KEY_ACCESS_TOKEN = stringPreferencesKey("access_token")
+        private val KEY_REFRESH_TOKEN = stringPreferencesKey("refresh_token")
     }
 }
