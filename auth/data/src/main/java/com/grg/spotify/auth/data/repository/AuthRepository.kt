@@ -1,13 +1,12 @@
 package com.grg.spotify.auth.data.repository
 
-import com.grg.spotify.auth.data.mappers.SerializedAccessTokenInfo
 import com.grg.spotify.auth.data.mappers.toDomain
 import com.grg.spotify.auth.data.networking.SpotifyAuthService
 import com.grg.spotify.auth.data.utils.Constants
-import com.grg.spotify.domain.AccessTokenInfo
-import com.grg.spotify.domain.IAuthRepository
-import com.grg.spotify.domain.ICodeChallengeProvider
-import com.grg.spotify.domain.ICodeVerifierStore
+import com.grg.spotify.domain.model.AccessTokenInfo
+import com.grg.spotify.domain.repository.IAuthRepository
+import com.grg.spotify.domain.networking.ICodeChallengeProvider
+import com.grg.spotify.domain.networking.ICodeVerifierStore
 import java.util.UUID
 import javax.inject.Inject
 
@@ -15,8 +14,7 @@ class AuthRepository @Inject constructor(
     private val codeChallengeProvider: ICodeChallengeProvider,
     private val codeStore: ICodeVerifierStore,
     private val spotifyAuthService: SpotifyAuthService
-) :
-    IAuthRepository {
+) : IAuthRepository {
 
     override fun requestAuthorization(
         clientId: String,
@@ -52,6 +50,16 @@ class AuthRepository @Inject constructor(
             redirectUri = redirectUri,
             clientId = clientId,
             codeVerifier = codeVerifier
+        ).toDomain()
+    }
+
+    override suspend fun refreshToken(
+        grantType: String,
+        refreshToken: String,
+        clientId: String
+    ): Result<AccessTokenInfo> {
+        return spotifyAuthService.refreshAccessToken(
+            grantType, refreshToken, clientId
         ).toDomain()
     }
 }

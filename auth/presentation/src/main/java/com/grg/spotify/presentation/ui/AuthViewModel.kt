@@ -9,9 +9,9 @@ import com.grg.core.domain.safeLet
 import com.grg.spotify.auth.data.utils.Constants
 import com.grg.spotify.auth.data.utils.Constants.AUTH_HOST
 import com.grg.spotify.auth.data.utils.Constants.AUTH_SCHEME
-import com.grg.spotify.domain.AccessTokenInfo
-import com.grg.spotify.domain.IAuthRepository
-import com.grg.spotify.domain.ICodeVerifierStore
+import com.grg.spotify.domain.model.AccessTokenInfo
+import com.grg.spotify.domain.repository.IAuthRepository
+import com.grg.spotify.domain.networking.ICodeVerifierStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow

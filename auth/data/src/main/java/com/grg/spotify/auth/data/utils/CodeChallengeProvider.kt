@@ -1,8 +1,8 @@
 package com.grg.spotify.auth.data.utils
 
 import com.grg.core.domain.orElse
-import com.grg.spotify.domain.ICodeChallengeProvider
-import com.grg.spotify.domain.ICodeVerifierStore
+import com.grg.spotify.domain.networking.ICodeChallengeProvider
+import com.grg.spotify.domain.networking.ICodeVerifierStore
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException

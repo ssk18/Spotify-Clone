@@ -2,8 +2,8 @@ package com.grg.spotify.auth.data.di
 
 import com.grg.spotify.auth.data.repository.AuthRepository
 import com.grg.spotify.auth.data.utils.CodeChallengeProvider
-import com.grg.spotify.domain.IAuthRepository
-import com.grg.spotify.domain.ICodeChallengeProvider
+import com.grg.spotify.domain.repository.IAuthRepository
+import com.grg.spotify.domain.networking.ICodeChallengeProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

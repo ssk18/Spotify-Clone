@@ -1,4 +1,4 @@
-package com.grg.spotify.domain
+package com.grg.spotify.domain.networking
 
 interface ICodeVerifierStore {
 
@@ -16,6 +16,6 @@ interface ICodeVerifierStore {
 
     fun getRefreshToken(): String?
 
-    fun saveRefreshToken(refreshToken: String?)
+    fun  saveRefreshToken(refreshToken: String?)
 
 }

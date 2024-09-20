@@ -1,4 +1,4 @@
-package com.grg.spotify.domain
+package com.grg.spotify.domain.model
 
 data class AccessTokenInfo(
     val accessToken: String? = null,

@@ -1,7 +1,7 @@
 package com.grg.spotify.auth.data.mappers
 
 import com.grg.core.domain.orElse
-import com.grg.spotify.domain.AccessTokenInfo
+import com.grg.spotify.domain.model.AccessTokenInfo
 import com.skydoves.sandwich.ApiResponse
 
 
