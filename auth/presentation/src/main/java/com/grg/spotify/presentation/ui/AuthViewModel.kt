@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.grg.core.domain.DataState
 import com.grg.core.domain.safeLet
-import com.grg.spotify.auth.data.utils.Constants
-import com.grg.spotify.auth.data.utils.Constants.AUTH_HOST
-import com.grg.spotify.auth.data.utils.Constants.AUTH_SCHEME
+import com.grg.spotify.core.utils.Constants
+import com.grg.spotify.core.utils.Constants.AUTH_HOST
+import com.grg.spotify.core.utils.Constants.AUTH_SCHEME
 import com.grg.spotify.domain.model.AccessTokenInfo
 import com.grg.spotify.domain.repository.IAuthRepository
 import com.grg.spotify.domain.networking.ICodeVerifierStore
@@ -38,7 +38,7 @@ class AuthViewModel @Inject constructor(
     ) {
         _accessTokenFlow.tryEmit(DataState.Loading)
         authRepository.requestAuthorization(
-            Constants.CLIENT_ID,
+            com.grg.spotify.core.utils.Constants.CLIENT_ID,
             scope = "user-read-private user-read-email",
             redirectUri = redirectUri,
             launchAuthScreen = launchUrl
@@ -63,7 +63,7 @@ class AuthViewModel @Inject constructor(
                     authCode = code,
                     codeVerifier = codeVerifierStore.getCodeVerifier().orEmpty(),
                     redirectUri = redirectUri,
-                    clientId = Constants.CLIENT_ID
+                    clientId = com.grg.spotify.core.utils.Constants.CLIENT_ID
                 ).onSuccess {
                     saveTokenInfo(it)
                     _accessTokenFlow.tryEmit(DataState.Success(it))

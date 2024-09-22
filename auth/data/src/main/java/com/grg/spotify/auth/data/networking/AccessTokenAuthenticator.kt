@@ -1,6 +1,6 @@
 package com.grg.spotify.auth.data.networking
 
-import com.grg.spotify.auth.data.utils.Constants
+import com.grg.spotify.core.utils.Constants
 import com.grg.spotify.domain.networking.ICodeVerifierStore
 import com.skydoves.sandwich.ApiResponse
 import kotlinx.coroutines.runBlocking

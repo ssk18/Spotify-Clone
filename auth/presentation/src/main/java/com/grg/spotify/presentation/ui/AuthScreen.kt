@@ -31,7 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.grg.core.presentation.ui.components.SpotifyActionButton
 import com.grg.core.presentation.ui.theme.MySpotifyTheme
 import com.grg.core.presentation.ui.theme.displayFontFamily
-import com.grg.spotify.auth.data.utils.Constants
+import com.grg.spotify.core.utils.Constants
 import com.grg.spotify.presentation.R
 import com.grg.spotify.presentation.ui.AuthViewModel
 
@@ -46,7 +46,7 @@ fun AuthScreenRoot(
         isLoading = false,
         onRequestAuthorization = {
             viewModel.requestAuthorization(
-                redirectUri = Constants.REDIRECT_URI
+                redirectUri = com.grg.spotify.core.utils.Constants.REDIRECT_URI
             ) {
                 val customTabsIntent = CustomTabsIntent.Builder().build()
                 customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -1,13 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    kotlin("plugin.serialization") version "1.6.21"   // Kotlinx Serialization plugin
     alias(libs.plugins.hilt)
     kotlin("kapt")
-    kotlin("plugin.serialization") version "1.6.21"   // Kotlinx Serialization plugin
 }
 
 android {
-    namespace = "com.grg.spotify.auth.data"
+    namespace = "com.grg.spotify.data"
     compileSdk = 34
 
     defaultConfig {
@@ -36,16 +36,15 @@ android {
 }
 
 dependencies {
-
     implementation(project(":auth:domain"))
+    implementation(project(":spotify:domain"))
     implementation(project(":core:data"))
-    implementation(project(":core:domain"))
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.sandwich)
     implementation(libs.sandwich.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     implementation(libs.serialization)
     implementation(libs.retrofit.serialization)
     implementation(libs.logging.interceptor)

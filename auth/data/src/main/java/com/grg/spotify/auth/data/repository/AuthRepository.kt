@@ -2,7 +2,7 @@ package com.grg.spotify.auth.data.repository
 
 import com.grg.spotify.auth.data.mappers.toDomain
 import com.grg.spotify.auth.data.networking.SpotifyAuthService
-import com.grg.spotify.auth.data.utils.Constants
+import com.grg.spotify.core.utils.Constants
 import com.grg.spotify.domain.model.AccessTokenInfo
 import com.grg.spotify.domain.repository.IAuthRepository
 import com.grg.spotify.domain.networking.ICodeChallengeProvider
