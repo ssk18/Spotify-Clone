@@ -1,0 +1,5 @@
+<resources>
+    <string name="spotify_logo">spotify logo</string>
+    <string name="spotify">Spotify</string>
+    <string name="authenticate">Authenticate</string>
+</resources>

@@ -21,10 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "My Spotify"
 include(":app")
-include(":auth")
-include(":auth:data")
-include(":auth:domain")
-include(":auth:presentation")
 include(":core")
 include(":core:data")
 include(":core:presentation")
@@ -33,3 +29,4 @@ include(":spotify")
 include(":spotify:data")
 include(":spotify:domain")
 include(":spotify:presenation")
+include(":spotify:auth")

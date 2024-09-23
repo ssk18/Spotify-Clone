@@ -36,8 +36,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":auth:domain"))
     implementation(project(":spotify:domain"))
+    implementation(project(":spotify:auth"))
     implementation(project(":core:data"))
     implementation(libs.sandwich)
     implementation(libs.sandwich.retrofit)

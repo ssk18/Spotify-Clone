@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.grg.spotify.presenation"
+    namespace = "com.grg.spotify.auth"
     compileSdk = 34
 
     defaultConfig {
@@ -26,41 +26,35 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
 
-    implementation(project(":core:presentation"))
     implementation(project(":core:domain"))
+    implementation(project(":spotify:domain"))
     implementation(project(":core:data"))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.browser)
-    implementation(libs.compose.splash.screen)
+    implementation(libs.sandwich)
+    implementation(libs.sandwich.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.serialization)
+    implementation(libs.retrofit.serialization)
+    implementation(libs.logging.interceptor)
+    api(libs.data.store)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     // hilt
     implementation(libs.hilt.android)
-    debugImplementation(libs.ui.tooling)
     kapt(libs.hilt.android.compiler)
     kapt(libs.androidx.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
