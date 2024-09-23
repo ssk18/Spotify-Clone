@@ -1,24 +1,20 @@
 package com.grg.spotify.auth.mappers
 
-import com.grg.spotify.domain.model.AccessTokenInfo
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class SerializedAccessTokenInfo(
-    @SerialName("access_token")
+    @SerializedName("access_token")
     val accessToken: String? = null,
 
-    @SerialName("token_type")
+    @SerializedName("token_type")
     val tokenType: String? = null,
 
-    @SerialName("scope")
+    @SerializedName("scope")
     val scope: String? = null,
 
-    @SerialName("expires_in")
+    @SerializedName("expires_in")
     val expiresIn: Int? = null,
 
-    @SerialName("refresh_token")
+    @SerializedName("refresh_token")
     val refreshToken: String? = null
 )
 

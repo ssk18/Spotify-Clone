@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
 class CodeVerifierStore(
-    private val dataStore: DataStore<androidx.datastore.preferences.core.Preferences>,
+    private val dataStore: DataStore<Preferences>,
 ) : ICodeVerifierStore {
     override fun getCodeVerifier(): String? {
         return getString(KEY_CODE_VERIFIER)

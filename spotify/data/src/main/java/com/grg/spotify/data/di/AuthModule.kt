@@ -1,8 +1,8 @@
 package com.grg.spotify.data.di
 
 import android.content.Context
-import com.grg.spotify.auth.extensions.authDataStore
 import com.grg.spotify.auth.repository.CodeVerifierStore
+import com.grg.spotify.core.extensions.dataStore
 import com.grg.spotify.domain.networking.ICodeVerifierStore
 import dagger.Module
 import dagger.Provides
@@ -18,5 +18,5 @@ object AuthModule {
     @Provides
     @Singleton
     fun provideCodeVerifierStore(@ApplicationContext context: Context): ICodeVerifierStore =
-        CodeVerifierStore(context.authDataStore)
+        CodeVerifierStore(context.dataStore)
 }

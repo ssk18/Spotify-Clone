@@ -54,7 +54,7 @@ android {
 dependencies {
 
     implementation(project(":core:presentation"))
-    implementation(project(":spotify:presenation"))
+    implementation(project(":spotify:presentation"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

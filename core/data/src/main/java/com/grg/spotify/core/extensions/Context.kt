@@ -1,4 +1,4 @@
-package com.grg.spotify.core.extensions
+ package com.grg.spotify.core.extensions
 
 import android.content.Context
 import androidx.datastore.core.DataStore

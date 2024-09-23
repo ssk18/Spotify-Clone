@@ -1,4 +1,4 @@
-package com.grg.spotify.presenation
+package com.grg.spotify.presentation
 
 import org.junit.Test
 

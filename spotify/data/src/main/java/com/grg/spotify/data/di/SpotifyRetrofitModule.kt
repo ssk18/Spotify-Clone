@@ -3,6 +3,7 @@ package com.grg.spotify.data.di
 import com.grg.spotify.core.utils.Constants.DEFAULT_TIMEOUT_SECONDS
 import com.grg.spotify.core.utils.Constants.Spotify_BASE_URL
 import com.grg.spotify.data.networking.SpotifyAppService
+import com.grg.core.domain.ICodeVerifierStore
 import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object SpotifyRetrofitModule {
+
+
+    @Provides
+    @Singleton
+    fun providesAuthenticator(
+        codeVerifierStore: com.grg.core.domain.ICodeVerifierStore,
+        spotifyAuthService: dagger.Lazy<SpotifyAuthService>
+    ): Authenticator =
+        AccessTokenAuthenticator(codeVerifierStore, spotifyAuthService)
 
     @Provides
     @Singleton
