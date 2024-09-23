@@ -1,5 +1,8 @@
 package com.grg.spotify.auth.mappers
 
+import com.google.gson.annotations.SerializedName
+import com.grg.spotify.domain.model.AccessTokenInfo
+
 
 data class SerializedAccessTokenInfo(
     @SerializedName("access_token")
