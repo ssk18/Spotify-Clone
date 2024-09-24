@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.grg.core.presentation.ui.theme.MySpotifyTheme
 import com.grg.spotify.presentation.ui.AuthActivity
+import com.grg.spotify.presentation.ui.AuthScreenRoot
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +25,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MySpotifyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    AuthScreenRoot(
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }

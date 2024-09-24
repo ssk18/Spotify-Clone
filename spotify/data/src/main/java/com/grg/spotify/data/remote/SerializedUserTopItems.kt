@@ -11,5 +11,5 @@ data class SerializedUserTopItems(
     @SerialName("previous") val prevPage: String? = null,
     @SerialName("offset") val offset: Int,
     @SerialName("total") val total: Int,
-    @SerialName("item") val item: SerializedItem
+    @SerialName("items") val items: List<SerializedItem>
 )

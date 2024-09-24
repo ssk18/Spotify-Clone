@@ -1,11 +1,22 @@
 package com.grg.spotify.data.mappers
 
+import com.grg.spotify.data.remote.SerializedAlbum
 import com.grg.spotify.data.remote.SerializedImage
 import com.grg.spotify.data.remote.SerializedItem
 import com.grg.spotify.data.remote.SerializedUserTopItems
+import com.grg.spotify.domain.model.Album
 import com.grg.spotify.domain.model.Image
 import com.grg.spotify.domain.model.Item
 import com.grg.spotify.domain.model.UserTopItems
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 fun SerializedItem.toDomain(): Item {
     return when (this) {
@@ -15,15 +26,16 @@ fun SerializedItem.toDomain(): Item {
             genres = this.genres,
             href = this.href,
             id = this.id,
-            images = this.images.map { it.toDomain() },
+            images = this.images.map { it.toImage() },
             name = this.name,
             popularity = this.popularity,
             type = this.type,
             uri = this.uri
         )
+
         is SerializedItem.SerializedTrack -> Item.Track(
             title = this.title,
-            album = this.album,
+            album = this.album.toAlbum(),
             durationMs = this.durationMs,
             popularity = this.popularity
         )
@@ -31,15 +43,20 @@ fun SerializedItem.toDomain(): Item {
 }
 
 // Mapper to convert from SerializedImage to Image (domain model)
-fun SerializedImage.toDomain(): Image {
+fun SerializedImage.toImage(): Image {
     return Image(
         url = this.url,
-        height = this.height,
-        width = this.width
+        height = this.height!!,
+        width = this.width!!
     )
 }
 
-fun SerializedUserTopItems.toDomain(): UserTopItems {
+fun SerializedAlbum.toAlbum(): Album =
+    Album(
+        albumType, totalTracks, availableMarkets
+    )
+
+fun SerializedUserTopItems.toUserTopItems(): UserTopItems {
     return UserTopItems(
         href = this.href,
         limit = this.limit,
@@ -47,6 +64,21 @@ fun SerializedUserTopItems.toDomain(): UserTopItems {
         prevPage = this.prevPage,
         offset = this.offset,
         total = this.total,
-        item = this.item.toDomain()
+        item = this.items.map { it.toDomain() }
     )
+}
+
+object StringSanitizer : KSerializer<String> {
+    override val descriptor: SerialDescriptor
+        get() = PrimitiveSerialDescriptor("UrlEncodedString", PrimitiveKind.STRING)
+
+    override fun deserialize(decoder: Decoder): String {
+        return URLDecoder.decode(decoder.toString(), StandardCharsets.UTF_8.toString())
+    }
+
+    override fun serialize(encoder: Encoder, value: String) {
+        val encoded = URLEncoder.encode(value, StandardCharsets.UTF_8.toString())
+        encoder.encodeString(encoded)
+    }
+
 }

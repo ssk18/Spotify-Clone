@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.grg.core.presentation.ui.theme.MySpotifyTheme
-import com.grg.spotify.core.utils.Constants
+import com.grg.core.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

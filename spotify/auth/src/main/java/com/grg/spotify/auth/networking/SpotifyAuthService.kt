@@ -1,7 +1,6 @@
 package com.grg.spotify.auth.networking
 
-import com.grg.spotify.auth.mappers.SerializedAccessTokenInfo
-import com.skydoves.sandwich.ApiResponse
+import com.grg.spotify.auth.model.SerializedAccessTokenInfo
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
@@ -18,7 +17,7 @@ interface SpotifyAuthService {
         @Field("redirect_uri") redirectUri: String,
         @Field("client_id") clientId: String,
         @Field("code_verifier") codeVerifier: String
-    ): ApiResponse<SerializedAccessTokenInfo>
+    ): SerializedAccessTokenInfo
 
     @FormUrlEncoded
     @Headers("Content-Type: application/x-www-form-urlencoded")
@@ -27,5 +26,5 @@ interface SpotifyAuthService {
         @Field("grant_type") grantType: String = "refresh_token",
         @Field("refresh_token") refreshToken: String,
         @Field("client_id") clientId: String
-    ): ApiResponse<SerializedAccessTokenInfo>
+    ): SerializedAccessTokenInfo
 }

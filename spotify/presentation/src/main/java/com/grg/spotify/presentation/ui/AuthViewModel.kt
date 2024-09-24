@@ -6,15 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.grg.core.domain.DataState
 import com.grg.core.domain.safeLet
-import com.grg.spotify.core.utils.Constants.AUTH_HOST
-import com.grg.spotify.core.utils.Constants.AUTH_SCHEME
+import com.grg.core.utils.Constants
+import com.grg.core.utils.Constants.AUTH_HOST
+import com.grg.core.utils.Constants.AUTH_SCHEME
+import com.grg.core.utils.Constants.SPOTIFY_SCOPES
 import com.grg.spotify.domain.model.AccessTokenInfo
 import com.grg.spotify.domain.networking.ICodeVerifierStore
 import com.grg.spotify.domain.repository.IAuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -28,8 +33,12 @@ class AuthViewModel @Inject constructor(
 
     private val _accessTokenFlow =
         MutableStateFlow<DataState<AccessTokenInfo>>(DataState.Uninitialized)
-    val accessTokenFlow = _accessTokenFlow.asStateFlow()
-
+    val accessTokenFlow = _accessTokenFlow.onStart { }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = (DataState.Uninitialized)
+        )
 
     fun requestAuthorization(
         redirectUri: String,
@@ -37,8 +46,8 @@ class AuthViewModel @Inject constructor(
     ) {
         _accessTokenFlow.tryEmit(DataState.Loading)
         authRepository.requestAuthorization(
-            com.grg.spotify.core.utils.Constants.CLIENT_ID,
-            scope = "user-read-private user-read-email",
+            Constants.CLIENT_ID,
+            scope = SPOTIFY_SCOPES,
             redirectUri = redirectUri,
             launchAuthScreen = launchUrl
         )
@@ -62,7 +71,7 @@ class AuthViewModel @Inject constructor(
                     authCode = code,
                     codeVerifier = codeVerifierStore.getCodeVerifier().orEmpty(),
                     redirectUri = redirectUri,
-                    clientId = com.grg.spotify.core.utils.Constants.CLIENT_ID
+                    clientId = Constants.CLIENT_ID
                 ).onSuccess {
                     saveTokenInfo(it)
                     _accessTokenFlow.tryEmit(DataState.Success(it))

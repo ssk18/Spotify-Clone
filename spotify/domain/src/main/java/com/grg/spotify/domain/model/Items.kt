@@ -16,11 +16,17 @@ sealed class Item {
 
     data class Track(
         val title: String,
-        val album: String,
+        val album: Album,
         val durationMs: Int,
         val popularity: Int
     ) : Item()
 }
+
+data class Album(
+    val albumType: String,
+    val totalTracks: Int,
+    val availableMarkets: List<String>,
+)
 
 // Data class for image (used by Artist)
 data class Image(

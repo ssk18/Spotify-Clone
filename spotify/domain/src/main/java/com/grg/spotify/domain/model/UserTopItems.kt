@@ -7,5 +7,5 @@ data class UserTopItems(
     val prevPage: String? = null,
     val offset: Int,
     val total: Int,
-    val item: Item,
+    val item: List<Item>,
 )

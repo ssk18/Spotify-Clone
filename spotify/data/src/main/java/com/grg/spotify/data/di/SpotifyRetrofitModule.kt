@@ -1,12 +1,14 @@
 package com.grg.spotify.data.di
 
-import com.grg.spotify.auth.networking.AccessTokenAuthenticator
 import com.grg.spotify.auth.networking.SpotifyAuthService
-import com.grg.spotify.core.utils.Constants.DEFAULT_TIMEOUT_SECONDS
-import com.grg.spotify.core.utils.Constants.Spotify_BASE_URL
+import com.grg.core.utils.Constants.BASE_URL
+import com.grg.core.utils.Constants.DEFAULT_TIMEOUT_SECONDS
+import com.grg.core.utils.Constants.Spotify_BASE_URL
+import com.grg.spotify.data.networking.AccessTokenAuthenticator
+import com.grg.spotify.data.networking.AuthTokenInterceptor
 import com.grg.spotify.data.networking.SpotifyAppService
 import com.grg.spotify.domain.networking.ICodeVerifierStore
-import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
+import com.grg.spotify.domain.repository.IAuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,44 +31,82 @@ object SpotifyRetrofitModule {
 
     @Provides
     @Singleton
-    fun providesAuthenticator(
-        codeVerifierStore: ICodeVerifierStore,
-        spotifyAuthService: dagger.Lazy<SpotifyAuthService>
-    ): Authenticator =
-        AccessTokenAuthenticator(codeVerifierStore, spotifyAuthService)
-
-    @Provides
-    @Singleton
-    @Named("data")
-    fun providesHttpClient(authenticator: Authenticator): OkHttpClient {
+    @Named("spotify_auth")
+    fun providesAuthHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .callTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .connectTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .authenticator(authenticator)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideRetrofitSpotifyService(@Named("data") okHttpClient: OkHttpClient): Retrofit {
+    @Named("spotify_auth")
+    fun providesAuthRetrofit(@Named("spotify_auth") okHttpClient: OkHttpClient): Retrofit {
+        val contentType = "application/json".toMediaType()
+
+        // Configure the Json instance for serialization
+        val json = Json {
+            ignoreUnknownKeys = true  // To ignore unknown keys in the response
+            isLenient = true          // Allow lenient JSON parsing
+        }
         return Retrofit.Builder()
-            .baseUrl(Spotify_BASE_URL)
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(
-                Json.asConverterFactory(
-                    "application/json; charset=UTF8".toMediaType()
-                )
+                json.asConverterFactory(contentType)
             )
-            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideSpotifyAuthService(retrofit: Retrofit): SpotifyAppService =
-        retrofit.create(SpotifyAppService::class.java)
+    fun provideSpotifyAuthService(@Named("spotify_auth") retrofit: Retrofit): SpotifyAuthService =
+        retrofit.create(SpotifyAuthService::class.java)
 
+
+    @Provides
+    @Singleton
+    @Named("spotify_data")
+    fun providesHttpClient(
+        @Named("spotify_auth") okHttpClient: OkHttpClient,
+        authenticator: Authenticator,
+        interceptor: AuthTokenInterceptor
+    ): OkHttpClient {
+        return okHttpClient.newBuilder()
+            .authenticator(authenticator)
+            .addInterceptor(interceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @Named("spotify_data")
+    fun provideRetrofitService(@Named("spotify_data") okHttpClient: OkHttpClient): Retrofit {
+        val contentType = "application/json".toMediaType()
+
+        // Configure the Json instance for serialization
+        val json = Json {
+            ignoreUnknownKeys = true  // To ignore unknown keys in the response
+            isLenient = true          // Allow lenient JSON parsing
+        }
+        return Retrofit.Builder()
+            .baseUrl(Spotify_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(
+                json.asConverterFactory(contentType)
+            )
+            .build()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideSpotifyAppService(@Named("spotify_data") retrofit: Retrofit): SpotifyAppService =
+        retrofit.create(SpotifyAppService::class.java)
 }
+
+

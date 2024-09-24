@@ -33,7 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.grg.core.presentation.ui.components.SpotifyActionButton
 import com.grg.core.presentation.ui.theme.MySpotifyTheme
 import com.grg.core.presentation.ui.theme.displayFontFamily
-import com.grg.spotify.core.utils.Constants
+import com.grg.core.utils.Constants
 import com.grg.spotify.presenation.R
 import com.grg.spotify.presentation.ui.AuthViewModel
 

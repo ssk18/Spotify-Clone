@@ -1,8 +1,9 @@
 package com.grg.spotify.auth.repository
 
-import com.grg.spotify.auth.mappers.toDomain
+import com.grg.spotify.auth.model.toAccessTokenInfo
+import com.grg.spotify.auth.model.toDomain
 import com.grg.spotify.auth.networking.SpotifyAuthService
-import com.grg.spotify.core.utils.Constants
+import com.grg.core.utils.Constants
 import com.grg.spotify.domain.model.AccessTokenInfo
 import com.grg.spotify.domain.networking.ICodeChallengeProvider
 import com.grg.spotify.domain.networking.ICodeVerifierStore
@@ -45,21 +46,25 @@ class AuthRepository @Inject constructor(
         clientId: String,
         codeVerifier: String
     ): Result<AccessTokenInfo> {
-        return spotifyAuthService.postRequestAccess(
-            authCode = authCode,
-            redirectUri = redirectUri,
-            clientId = clientId,
-            codeVerifier = codeVerifier
-        ).toDomain()
+        return runCatching {
+            spotifyAuthService.postRequestAccess(
+                authCode = authCode,
+                redirectUri = redirectUri,
+                clientId = clientId,
+                codeVerifier = codeVerifier
+            ).toAccessTokenInfo()
+        }
     }
 
     override suspend fun refreshToken(
-        grantType: String,
         refreshToken: String,
         clientId: String
     ): Result<AccessTokenInfo> {
-        return spotifyAuthService.refreshAccessToken(
-            grantType, refreshToken, clientId
-        ).toDomain()
+        return runCatching {
+            spotifyAuthService.refreshAccessToken(
+                refreshToken = refreshToken,
+                clientId = clientId
+            ).toAccessTokenInfo()
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.grg.spotify.auth.mappers
+package com.grg.spotify.auth.model
 
 import com.grg.core.domain.orElse
 import com.grg.spotify.domain.model.AccessTokenInfo

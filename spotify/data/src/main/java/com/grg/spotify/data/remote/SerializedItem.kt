@@ -25,7 +25,7 @@ sealed class SerializedItem {
     @SerialName("track")
     data class SerializedTrack(
         @SerialName("title") val title: String,
-        @SerialName("album") val album: String,
+        @SerialName("album") val album: SerializedAlbum,
         @SerialName("duration_ms") val durationMs: Int,
         @SerialName("popularity") val popularity: Int
     ) : SerializedItem()
@@ -37,6 +37,13 @@ data class ExternalUrls(
 )
 
 @Serializable
+data class SerializedAlbum(
+    @SerialName("album_type") val albumType: String,
+    @SerialName("total_tracks") val totalTracks: Int,
+    @SerialName("available_markets") val availableMarkets: List<String>,
+)
+
+@Serializable
 data class Followers(
     @SerialName("href") val href: String?,
     @SerialName("total") val total: Int
@@ -45,6 +52,6 @@ data class Followers(
 @Serializable
 data class SerializedImage(
     @SerialName("url") val url: String,
-    @SerialName("height") val height: Int,
-    @SerialName("width") val width: Int
+    @SerialName("height") val height: Int?,
+    @SerialName("width") val width: Int?
 )

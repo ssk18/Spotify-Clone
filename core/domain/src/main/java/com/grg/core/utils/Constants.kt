@@ -1,4 +1,4 @@
-package com.grg.spotify.core.utils
+package com.grg.core.utils
 
 object Constants {
 
@@ -10,5 +10,6 @@ object Constants {
     const val AUTH_SCHEME = "gssa"
     const val REDIRECT_URI   = "$AUTH_SCHEME://$AUTH_HOST"
     val DEFAULT_TIMEOUT_SECONDS = 10000L
+    val SPOTIFY_SCOPES = listOf("user-read-private", "user-read-email", "user-top-read").joinToString(separator = " ")
 
 }

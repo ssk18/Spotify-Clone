@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    kotlin("plugin.serialization") version "1.6.21"   // Kotlinx Serialization plugin
+    kotlin("plugin.serialization") version "2.0.20"  // Kotlinx Serialization plugin
     alias(libs.plugins.hilt)
     kotlin("kapt")
 }
@@ -35,10 +35,12 @@ android {
     }
 }
 
+
 dependencies {
     implementation(project(":spotify:domain"))
     implementation(project(":spotify:domain"))
     implementation(project(":core:data"))
+    implementation(project(":core:domain"))
     implementation(project(":spotify:auth"))
     implementation(libs.sandwich)
     implementation(libs.sandwich.retrofit)

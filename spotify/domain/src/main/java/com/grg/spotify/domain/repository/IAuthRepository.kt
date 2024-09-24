@@ -19,7 +19,6 @@ interface IAuthRepository {
     ): Result<AccessTokenInfo>
 
     suspend fun refreshToken(
-       grantType:String,
        refreshToken: String,
        clientId: String
     ): Result<AccessTokenInfo>
