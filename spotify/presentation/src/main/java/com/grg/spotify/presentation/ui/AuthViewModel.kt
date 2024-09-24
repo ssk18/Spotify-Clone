@@ -33,12 +33,7 @@ class AuthViewModel @Inject constructor(
 
     private val _accessTokenFlow =
         MutableStateFlow<DataState<AccessTokenInfo>>(DataState.Uninitialized)
-    val accessTokenFlow = _accessTokenFlow.onStart { }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = (DataState.Uninitialized)
-        )
+    val accessTokenFlow = _accessTokenFlow.asStateFlow()
 
     fun requestAuthorization(
         redirectUri: String,

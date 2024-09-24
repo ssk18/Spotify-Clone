@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.hilt)
     id("org.jetbrains.kotlin.plugin.compose") version "2.0.20"
     kotlin("kapt")
+    kotlin("plugin.serialization") version "2.0.20"  // Kotlinx Serialization plugin
 }
 
 android {
@@ -55,7 +56,9 @@ android {
 dependencies {
 
     implementation(project(":core:presentation"))
+    implementation(project(":core:domain"))
     implementation(project(":spotify:presentation"))
+    implementation(project(":spotify:domain"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -65,6 +68,13 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.serialization)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.compose.splash.screen)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
