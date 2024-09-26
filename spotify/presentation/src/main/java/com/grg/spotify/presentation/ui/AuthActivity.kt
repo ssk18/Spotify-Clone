@@ -79,6 +79,7 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         Log.d("AuthActivity123", "onCreate intent: ${intent?.data}")
@@ -87,7 +88,7 @@ class AuthActivity : AppCompatActivity() {
 
     companion object {
         private const val KEY_DESTINATION_INTENT = "destination_intent"
-        private const val KEY_ACCESS_TOKEN = "access_token"
+         const val KEY_ACCESS_TOKEN = "access_token"
 
         fun createLaunchIntent(context: Context, destination: ComponentName): Intent =
             Intent(context, AuthActivity::class.java).apply {

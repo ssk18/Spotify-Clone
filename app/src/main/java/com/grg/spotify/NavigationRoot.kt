@@ -29,10 +29,13 @@ import kotlinx.serialization.Serializable
 //}
 
 
-sealed interface NavRoutes {
-
-    @Serializable
-    data object AuthScreen: NavRoutes
-
-
-}
+//sealed interface NavRoutes {
+//
+//    @Serializable
+//    data object AuthActivity: NavRoutes
+//
+//    @Serializable
+//    data object
+//
+//
+//}
