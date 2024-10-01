@@ -2,4 +2,5 @@
     <string name="spotify_logo">spotify logo</string>
     <string name="spotify">Spotify</string>
     <string name="authenticate">Authenticate</string>
+    <string name="bottom_navigation_icon">Bottom navigation icon</string>
 </resources>

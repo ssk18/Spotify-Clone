@@ -1,13 +1,14 @@
 package com.grg.spotify.auth.repository
 
-import com.grg.spotify.auth.model.toAccessTokenInfo
-import com.grg.spotify.auth.model.toDomain
-import com.grg.spotify.auth.networking.SpotifyAuthService
+import android.net.Uri
 import com.grg.core.utils.Constants
+import com.grg.spotify.auth.model.toAccessTokenInfo
+import com.grg.spotify.auth.networking.SpotifyAuthService
 import com.grg.spotify.domain.model.AccessTokenInfo
 import com.grg.spotify.domain.networking.ICodeChallengeProvider
 import com.grg.spotify.domain.networking.ICodeVerifierStore
 import com.grg.spotify.domain.repository.IAuthRepository
+import java.net.URLEncoder
 import java.util.UUID
 import javax.inject.Inject
 
@@ -31,6 +32,7 @@ class AuthRepository @Inject constructor(
             "client_id" to clientId,
             "response_type" to "code",
             "redirect_uri" to redirectUri,
+            "scope" to scope,
             "code_challenge_method" to "S256",
             "state" to state,
             "code_challenge" to codeChallenge

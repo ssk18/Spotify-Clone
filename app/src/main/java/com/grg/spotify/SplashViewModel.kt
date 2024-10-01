@@ -20,7 +20,6 @@ class SplashViewModel @Inject constructor(
     @Named("default") private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-
     private val _accessTokenFlow = MutableStateFlow<AccessTokenState>(AccessTokenState.Loading)
     val accessTokenFlow = _accessTokenFlow
         .onStart { loadAccessToken() }

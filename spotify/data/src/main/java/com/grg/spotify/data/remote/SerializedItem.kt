@@ -10,7 +10,7 @@ sealed class SerializedItem {
     @SerialName("artist")
     data class SerializedArtist(
         @SerialName("external_urls") val externalUrls: ExternalUrls,
-        @SerialName("followers") val followers: Followers,
+        @SerialName("followers") val followers: SerializedFollowers,
         @SerialName("genres") val genres: List<String>,
         @SerialName("href") val href: String,
         @SerialName("id") val id: String,
@@ -44,7 +44,7 @@ data class SerializedAlbum(
 )
 
 @Serializable
-data class Followers(
+data class SerializedFollowers(
     @SerialName("href") val href: String?,
     @SerialName("total") val total: Int
 )

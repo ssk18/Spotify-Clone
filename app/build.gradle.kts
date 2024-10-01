@@ -57,6 +57,7 @@ dependencies {
 
     implementation(project(":core:presentation"))
     implementation(project(":core:domain"))
+    implementation(project(":core:data"))
     implementation(project(":spotify:presentation"))
     implementation(project(":spotify:domain"))
     implementation(libs.androidx.core.ktx)
@@ -75,6 +76,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.constraintlayout)
+    implementation(libs.immutable.collections)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

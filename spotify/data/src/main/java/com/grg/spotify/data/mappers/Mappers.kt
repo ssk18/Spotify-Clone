@@ -1,12 +1,16 @@
 package com.grg.spotify.data.mappers
 
 import com.grg.spotify.data.remote.SerializedAlbum
+import com.grg.spotify.data.remote.SerializedFollowers
 import com.grg.spotify.data.remote.SerializedImage
 import com.grg.spotify.data.remote.SerializedItem
+import com.grg.spotify.data.remote.SerializedSpotifyUser
 import com.grg.spotify.data.remote.SerializedUserTopItems
 import com.grg.spotify.domain.model.Album
+import com.grg.spotify.domain.model.Followers
 import com.grg.spotify.domain.model.Image
 import com.grg.spotify.domain.model.Item
+import com.grg.spotify.domain.model.SpotifyUser
 import com.grg.spotify.domain.model.UserTopItems
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -56,6 +60,9 @@ fun SerializedAlbum.toAlbum(): Album =
         albumType, totalTracks, availableMarkets
     )
 
+fun SerializedFollowers.toFollowers(): Followers =
+    Followers(href, total)
+
 fun SerializedUserTopItems.toUserTopItems(): UserTopItems {
     return UserTopItems(
         href = this.href,
@@ -67,6 +74,16 @@ fun SerializedUserTopItems.toUserTopItems(): UserTopItems {
         item = this.items.map { it.toDomain() }
     )
 }
+
+
+fun SerializedSpotifyUser.toSpotifyUser(): SpotifyUser =
+    SpotifyUser(
+        userName = userName,
+        followers = this.followers.toFollowers(),
+        images = images.map { it.toImage() },
+        product = product
+    )
+
 
 object StringSanitizer : KSerializer<String> {
     override val descriptor: SerialDescriptor

@@ -73,7 +73,7 @@ object SpotifyRetrofitModule {
     @Named("spotify_data")
     fun providesHttpClient(
         @Named("spotify_auth") okHttpClient: OkHttpClient,
-        authenticator: Authenticator,
+        authenticator: AccessTokenAuthenticator,
         interceptor: AuthTokenInterceptor
     ): OkHttpClient {
         return okHttpClient.newBuilder()
@@ -101,7 +101,6 @@ object SpotifyRetrofitModule {
             )
             .build()
     }
-
 
     @Provides
     @Singleton
