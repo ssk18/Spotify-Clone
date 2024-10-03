@@ -46,9 +46,7 @@ dependencies {
 
     implementation(project(":core:presentation"))
     implementation(project(":spotify:domain"))
-    implementation(project(":spotify:data"))
     implementation(project(":core:domain"))
-    implementation(project(":core:data"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

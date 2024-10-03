@@ -1,5 +1,6 @@
 package com.grg.core.presentation.ui.components.topappbar
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -29,10 +30,11 @@ fun CustomTopAppBar(
     userInitials: Char,
     selectedText: String,
     onTextSelected: (String) -> Unit,
-    onProfileClick: () -> Unit
+    onProfileClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(
                 start = 16.dp,

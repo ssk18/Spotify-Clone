@@ -1,4 +1,4 @@
-package com.grg.spotify.data.remote
+package com.grg.spotify.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

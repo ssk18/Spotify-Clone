@@ -30,6 +30,7 @@ retrofit-serialization = "2.11.0"
 navigationCompose = "2.8.1"
 constraintlayout-compose = "1.0.1"
 jetbrains-collections = "0.3.8"
+coil = "2.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -76,6 +77,8 @@ retrofit-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-se
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
 immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "jetbrains-collections" }
+compose-coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil-kt = { module = "io.coil-kt:coil", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

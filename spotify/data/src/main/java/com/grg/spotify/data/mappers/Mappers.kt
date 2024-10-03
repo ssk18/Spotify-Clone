@@ -1,11 +1,11 @@
 package com.grg.spotify.data.mappers
 
-import com.grg.spotify.data.remote.SerializedAlbum
-import com.grg.spotify.data.remote.SerializedFollowers
-import com.grg.spotify.data.remote.SerializedImage
-import com.grg.spotify.data.remote.SerializedItem
-import com.grg.spotify.data.remote.SerializedSpotifyUser
-import com.grg.spotify.data.remote.SerializedUserTopItems
+import com.grg.spotify.data.dto.SerializedAlbum
+import com.grg.spotify.data.dto.SerializedFollowers
+import com.grg.spotify.data.dto.SerializedImage
+import com.grg.spotify.data.dto.SerializedItem
+import com.grg.spotify.data.dto.SerializedSpotifyUser
+import com.grg.spotify.data.dto.SerializedUserTopItems
 import com.grg.spotify.domain.model.Album
 import com.grg.spotify.domain.model.Followers
 import com.grg.spotify.domain.model.Image
@@ -22,7 +22,7 @@ import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-fun SerializedItem.toDomain(): Item {
+inline fun SerializedItem.toDomain(): Item {
     return when (this) {
         is SerializedItem.SerializedArtist -> Item.Artist(
             externalUrls = mapOf("spotify" to this.externalUrls.spotify),
@@ -30,7 +30,7 @@ fun SerializedItem.toDomain(): Item {
             genres = this.genres,
             href = this.href,
             id = this.id,
-            images = this.images.map { it.toImage() },
+            image = this.images.map { it.toImage() },
             name = this.name,
             popularity = this.popularity,
             type = this.type,

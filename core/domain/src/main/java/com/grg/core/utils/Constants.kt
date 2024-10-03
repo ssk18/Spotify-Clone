@@ -10,6 +10,6 @@ object Constants {
     const val AUTH_SCHEME = "gssa"
     const val REDIRECT_URI   = "$AUTH_SCHEME://$AUTH_HOST"
     val DEFAULT_TIMEOUT_SECONDS = 10000L
-    val SPOTIFY_SCOPES = listOf("user-read-private","user-read-email","user-top-read").joinToString(separator = " ")
+    val SPOTIFY_SCOPES = listOf("user-read-private","user-read-email","user-top-read","user-follow-read").joinToString(separator = " ")
 
 }

@@ -1,6 +1,5 @@
-package com.grg.spotify.data.remote
+package com.grg.spotify.data.dto
 
-import com.grg.spotify.domain.model.UserTopItems
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -4,6 +4,7 @@ import com.grg.spotify.auth.networking.SpotifyAuthService
 import com.grg.core.utils.Constants.BASE_URL
 import com.grg.core.utils.Constants.DEFAULT_TIMEOUT_SECONDS
 import com.grg.core.utils.Constants.Spotify_BASE_URL
+import com.grg.spotify.data.dto.SerializedItem
 import com.grg.spotify.data.networking.AccessTokenAuthenticator
 import com.grg.spotify.data.networking.AuthTokenInterceptor
 import com.grg.spotify.data.networking.SpotifyAppService
@@ -14,6 +15,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
 import okhttp3.Authenticator
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -90,8 +93,8 @@ object SpotifyRetrofitModule {
 
         // Configure the Json instance for serialization
         val json = Json {
-            ignoreUnknownKeys = true  // To ignore unknown keys in the response
-            isLenient = true          // Allow lenient JSON parsing
+            ignoreUnknownKeys = true
+            isLenient = true
         }
         return Retrofit.Builder()
             .baseUrl(Spotify_BASE_URL)
